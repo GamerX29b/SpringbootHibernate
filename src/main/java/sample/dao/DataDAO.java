@@ -5,7 +5,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 
@@ -37,6 +40,8 @@ public class DataDAO implements DataDAOInterface<Data, String> {
         currentTransaction.commit();
         currentSession.close();
     }
+
+
 
     private static SessionFactory getSessionFactory() {
         Configuration configuration = new Configuration().configure();
