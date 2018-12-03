@@ -5,11 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 
-    @Entity
+@Entity
     @Table(name = "Full_info")
-    public class Data {
+    public class Data implements Serializable {
 
         @Id
         @GeneratedValue
@@ -29,32 +30,23 @@ import javax.persistence.Id;
             return info_id;
         }
 
-        public void setId(Long id) {
-            this.info_id = info_id;
-        }
+        public void setId(Long id) {this.info_id = info_id; }
 
-        public String getName() {
-            return name;
-        }
+        public String getName() {return name;}
 
-        public void setName(String name) {
-            this.name = name;
-        }
+        public void setName(String name) {this.name = name;}
 
-        public String getSurname() {
-            return surname;
-        }
+        public String getSurname() { return surname;}
 
-        public void setSurname(String surname) {
-            this.surname = surname;
-        }
-        public String getPatronymic() {
-            return patronymic;
-        }
+        public void setSurname(String surname) {this.surname = surname;}
 
-        public void setPatronymic(String patronymic) {
-            this.patronymic = patronymic;
-        }
+        public String getPatronymic() {return patronymic;}
+
+        public void setPatronymic(String patronymic) {this.patronymic = patronymic;}
+
+        @Override
+        public String toString(){return getId() + "," +  getName() + ","
+                + getSurname() + "," + getPatronymic();}
     }
 
 
