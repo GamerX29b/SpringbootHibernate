@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package sample.jsp;
+package sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import sample.dao.Data;
-import sample.dao.DataService;
-
-import java.util.List;
 
 @SpringBootApplication
 public class SampleWebJspApplication extends SpringBootServletInitializer {
@@ -36,12 +32,8 @@ public class SampleWebJspApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(SampleWebJspApplication.class, args);
 
-		System.out.println("Найденные данные :");
-		List<Data> data = DataService.findAll();
-		for (Data b : data) {
-			System.out.println("-" + b.toString());
 		}
 
 	}
 
-}
+

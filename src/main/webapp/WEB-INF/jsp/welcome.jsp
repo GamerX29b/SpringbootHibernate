@@ -7,22 +7,22 @@
 
 <body>
 <h1>Главная страница</h1>
-<form action = "servlet0" method = "POST">
+<form action = "TwoTable" method = "POST">
 	<table border = "0">
 
 		<tr>
 			<td><b>Назовите имя </b></td>
-			<td><input type = "text" name = "parametr0"
+			<td><input type = "text" name = "ParamName"
 					   value = "Zero" size = "70"/></td>
 		</tr>
 		<tr>
 			<td><b>Назовите фамилию </b></td>
-			<td><input type = "text" name = "parametr1"
+			<td><input type = "text" name = "ParamSurname"
 					   value = "one" size = "70"/></td>
 		</tr>
 		<tr>
 			<td><b>Назовите отчество </b></td>
-			<td><input type = "text" name = "parametr2"
+			<td><input type = "text" name = "ParamPan"
 					   value = "two" size = "70"/></td>
 		</tr>
 
@@ -33,24 +33,21 @@
 	</table>
 </form>
 
-<%
-	Cookie cookie = null;
-	Cookie[] cookies = null;
+${time}	${message}
 
-	cookies = request.getCookies();
-	if( cookies != null ){
-		for (int i = 0; i < cookies.length; i++){
-			cookie = cookies[i];
+<form action = "search" method = "POST">
+	<table border = "0">
 
-			if ((cookie.getName()).equals("Name")){
-				out.print("Я знаю тебя как " + cookie.getValue());
-			}
-		}
-	}else{
-		out.println("<h2>нет Cookie</h2>");
-	}
-%>
+		<tr>
+			<td><b>Id</b></td>
+			<td><input type = "text" name = "ParamId"
+					   value = "1" size = "70"/></td>
+		</tr>
+		<tr>
+			<td colspan = "2"><input type = "submit" value = "Найти"/></td>
+		</tr>
 
-<a href="TwoTable">Войти</a>
+	</table>
+</form>
 </body>
 </html>

@@ -14,29 +14,12 @@
 <head>
     <title>Title</title>
 
-    <%
-    Cookie cookie = null;
-    Cookie[] cookies = null;
-
-    cookies = request.getCookies();
-    if( cookies != null ){
-    out.println("<h2> Приветствие пользователя </h2>");
-    for (int i = 0; i < cookies.length; i++){
-    cookie = cookies[i];
-
-    if ((cookie.getName()).equals("Name")){
-    out.print("Hello " + cookie.getValue());
-    }
-    }
-    }else{
-    out.println("<h2>нет Cookie</h2>");
-    }
-%>
+    ${time}	${message}
 </head>
 <body>
 
 <sql:setDataSource var = "Base" driver = "org.h2.Driver"
-                   url = "jdbc:h2:~/Base"
+                   url = "jdbc:h2:tcp://localhost/~/Base"
                    user = "sa"  password = ""/>
 
 <sql:query dataSource = "${Base}" sql = "select * from Full_info;" var = "result">

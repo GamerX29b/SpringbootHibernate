@@ -1,45 +1,49 @@
 package sample.dao;
 
-import java.util.List;
+import org.springframework.stereotype.Controller;
 
-    public class DataService {
+@Controller
+    public class IndexController {
 
-        private static DataDAO dataDAO;
 
-        public DataService() {
+
+
+       /* private static DataDAO dataDAO;
+
+        public IndexController() {
             dataDAO = new DataDAO();
         }
 
-        public void persist(Data entity) {
+        public void persist(DataJPA entity) {
             dataDAO.openCurrentSessionwithTransaction();
             dataDAO.persist(entity);
             dataDAO.closeCurrentSessionwithTransaction();
         }
 
-        public void update(Data entity) {
+        public void update(DataJPA entity) {
             dataDAO.openCurrentSessionwithTransaction();
             dataDAO.update(entity);
             dataDAO.closeCurrentSessionwithTransaction();
         }
 
-        public Data findById(String id) {
+        public DataJPA findById(String id) {
             dataDAO.openCurrentSession();
-            Data data = dataDAO.findById(id);
+            DataJPA data = dataDAO.findById(id);
             dataDAO.closeCurrentSession();
             return data;
         }
 
         public void delete(String id) {
             dataDAO.openCurrentSessionwithTransaction();
-            Data data = dataDAO.findById(id);
+            DataJPA data = dataDAO.findById(id);
             dataDAO.delete(data);
             dataDAO.closeCurrentSessionwithTransaction();
         }
 
-        public static List<Data> findAll() {
+        public static List<DataJPA> findAll() {
             dataDAO = new DataDAO();
             dataDAO.openCurrentSession();
-            List<Data> books = dataDAO.findAll();
+            List<DataJPA> books = dataDAO.findAll();
             dataDAO.closeCurrentSession();
             return books;
         }
@@ -52,6 +56,6 @@ import java.util.List;
 
         public DataDAO bookDao() {
             return dataDAO;
-        }
+        }*/
     }
 

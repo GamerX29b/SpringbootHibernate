@@ -1,19 +1,31 @@
 package sample.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
-import javax.persistence.EntityManagerFactory;
-import java.util.List;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+@Component("dataDAOInterface")
+@Transactional
+class DataDAO implements DataDAOInterface {
+
+    private final DataRepository dataRepository;
+
+    DataDAO(DataRepository cityRepository){
+        this.dataRepository = cityRepository;
+    }
 
 
-public class DataDAO implements DataDAOInterface<Data, String> {
+    @Override
+    public DataJPA getData(Long Id) { //Геттер
 
+        Assert.notNull(Id, "Id must not be null");
+        return this.dataRepository.findById(Id);
+
+    }
+
+
+    /*
     private Session currentSession;
 
     private Transaction currentTransaction;
@@ -67,33 +79,33 @@ public class DataDAO implements DataDAOInterface<Data, String> {
         this.currentTransaction = currentTransaction;
     }
 
-    public void persist(Data entity) {
+    public void persist(DataJPA entity) {
         getCurrentSession().save(entity);
     }
 
-    public void update(Data entity) {
+    public void update(DataJPA entity) {
         getCurrentSession().update(entity);
     }
 
-    public Data findById(String id) {
-        Data book = (Data) getCurrentSession().get(Data.class, id);
+    public DataJPA findById(String id) {
+        DataJPA book = (DataJPA) getCurrentSession().get(DataJPA.class, id);
         return book;
     }
 
-    public void delete(Data entity) {
+    public void delete(DataJPA entity) {
         getCurrentSession().delete(entity);
     }
 
     @SuppressWarnings("unchecked")
-    public List<Data> findAll() {
-        List<Data> inf = (List<Data>) getCurrentSession().createQuery("from Data").list();
+    public List<DataJPA> findAll() {
+        List<DataJPA> inf = (List<DataJPA>) getCurrentSession().createQuery("from DataJPA").list();
         return inf;
     }
 
     public void deleteAll() {
-        List<Data> entityList = findAll();
-        for (Data entity : entityList) {
+        List<DataJPA> entityList = findAll();
+        for (DataJPA entity : entityList) {
             delete(entity);
         }
-    }
+    }*/
 }

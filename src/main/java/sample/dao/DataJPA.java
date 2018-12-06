@@ -10,12 +10,12 @@ import java.io.Serializable;
 
 @Entity
     @Table(name = "Full_info")
-    public class Data implements Serializable {
+    public class DataJPA implements Serializable { //Подключение к базе
 
         @Id
         @GeneratedValue
         @Column(name = "info_id", nullable = false)
-        private int info_id;
+        private Long id;
 
         @Column(name = "name", nullable = false)
         private String name;
@@ -26,11 +26,11 @@ import java.io.Serializable;
         @Column(name = "patronymic", nullable = false)
         private String patronymic;
 
-        public int getId() {
-            return info_id;
+        public Long getId() {
+            return id;
         }
 
-        public void setId(Long id) {this.info_id = info_id; }
+        public void setId(Long id) {this.id = id; }
 
         public String getName() {return name;}
 

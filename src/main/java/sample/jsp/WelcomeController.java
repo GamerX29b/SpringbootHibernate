@@ -19,13 +19,27 @@ package sample.jsp;
 import java.util.Date;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import sample.dao.DataDAOInterface;
+import sample.dao.*;
 
 @Controller
+
 public class WelcomeController {
+
+	@Autowired
+	private DataDAOInterface data;
+	private DataInRepository dataInRepository;
+
+	public WelcomeController(DataInRepository dataInRepository) {
+		this.dataInRepository = dataInRepository;
+	}
 
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
@@ -34,15 +48,42 @@ public class WelcomeController {
 	public String welcome(Map<String, Object> model) {
 		model.put("time", new Date());
 		model.put("message", this.message);
+
 		return "welcome";
 	}
 
-	@GetMapping("/TwoTable")
-	public String TwoTable(Map<String, Object> model) {
+	@RequestMapping(value = "/TwoTable", method = RequestMethod.POST)
+	public String post(@RequestParam("ParamName") String ParamName,
+					   @RequestParam("ParamSurname") String ParamSurname,
+					   @RequestParam("ParamPan") String ParamPan ) {
+
+
+		DataJPA dataJPA = new DataJPA();
+
+		dataJPA.setName(ParamName);
+		dataJPA.setSurname(ParamSurname);
+		dataJPA.setPatronymic(ParamPan);
+
+		dataInRepository.save(dataJPA);
+
+		/*put ();
 		model.put("time", new Date());
-		model.put("message", this.message);
+		model.put("message", this.message);*/
 		return "TwoTable";
 	}
+	@PostMapping ("/search")
+	@ResponseBody
+	@Transactional(readOnly = true)
+	public String search(@RequestParam("ParamId") long ParamId) {
+
+		String ret;
+
+		long idlong = ParamId;
+
+		try {ret = this.data.getData(idlong).getName() ;} catch (NullPointerException e){ ret = "Null" ;};
+		return ret;
+	}
+
 
 	@RequestMapping("/foo")
 	public String foo(Map<String, Object> model) {

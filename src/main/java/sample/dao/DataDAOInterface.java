@@ -1,14 +1,17 @@
 package sample.dao;
-import org.springframework.data.domain.Page;
 
-import java.io.Serializable;
-import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 public interface DataDAOInterface{
 
 
-        //Page<Data> ;
-        Data getName (String Id);
+        //Page<DataJPA> ;
+        DataJPA getData (Long Id);
+
+
     /*    public void update(T entity);
 
         public T findById(Id id);
