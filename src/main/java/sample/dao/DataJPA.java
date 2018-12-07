@@ -1,11 +1,8 @@
 package sample.dao;
 
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 
 @Entity
@@ -15,7 +12,7 @@ import java.io.Serializable;
         @Id
         @GeneratedValue
         @Column(name = "info_id", nullable = false)
-        private Long id;
+        private int id;
 
         @Column(name = "name", nullable = false)
         private String name;
@@ -26,11 +23,19 @@ import java.io.Serializable;
         @Column(name = "patronymic", nullable = false)
         private String patronymic;
 
-        public Long getId() {
+
+        public DataJPA(Collection<DataAdress> DataAdress) {
+            this.DataAdress = DataAdress;
+        }
+
+        public DataJPA() {
+        }
+
+        public int getId() {
             return id;
         }
 
-        public void setId(Long id) {this.id = id; }
+        public void setId(int id) {this.id = id; }
 
         public String getName() {return name;}
 
@@ -44,9 +49,13 @@ import java.io.Serializable;
 
         public void setPatronymic(String patronymic) {this.patronymic = patronymic;}
 
+
         @Override
         public String toString(){return getId() + "," +  getName() + ","
                 + getSurname() + "," + getPatronymic();}
-    }
 
+        @OneToMany (fetch = FetchType.EAGER,  targetEntity = DataAdress.class)
+        @JoinColumn(name = "INFO_ID", updatable = true, insertable = true)
+        private Collection<DataAdress> DataAdress;
+    }
 

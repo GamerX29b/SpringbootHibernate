@@ -35,7 +35,7 @@
 
 ${time}	${message}
 
-<form action = "search" method = "POST">
+<form action = "ObjPerson" method = "POST">
 	<table border = "0">
 
 		<tr>

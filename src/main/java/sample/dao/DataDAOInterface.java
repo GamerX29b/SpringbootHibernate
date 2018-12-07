@@ -9,7 +9,7 @@ public interface DataDAOInterface{
 
 
         //Page<DataJPA> ;
-        DataJPA getData (Long Id);
+        DataJPA getData (int Id);
 
 
     /*    public void update(T entity);

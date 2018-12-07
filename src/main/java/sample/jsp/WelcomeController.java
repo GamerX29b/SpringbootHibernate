@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +35,13 @@ public class WelcomeController {
 	@Autowired
 	private DataDAOInterface data;
 	private DataInRepository dataInRepository;
+	private AdressRepository adressRepository;
 
-	public WelcomeController(DataInRepository dataInRepository) {
+	public WelcomeController(DataInRepository dataInRepository, AdressRepository adressRepository) {
 		this.dataInRepository = dataInRepository;
+		this.adressRepository = adressRepository;
 	}
+
 
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
@@ -52,8 +54,8 @@ public class WelcomeController {
 		return "welcome";
 	}
 
-	@RequestMapping(value = "/TwoTable", method = RequestMethod.POST)
-	public String post(@RequestParam("ParamName") String ParamName,
+	@RequestMapping(value = "/TwoTable", method = RequestMethod.POST)  //передаём с таблицы welcome POST
+	public String post(@RequestParam("ParamName") String ParamName,    //С этими параметрами
 					   @RequestParam("ParamSurname") String ParamSurname,
 					   @RequestParam("ParamPan") String ParamPan ) {
 
@@ -66,24 +68,32 @@ public class WelcomeController {
 
 		dataInRepository.save(dataJPA);
 
-		/*put ();
-		model.put("time", new Date());
-		model.put("message", this.message);*/
+
 		return "TwoTable";
 	}
-	@PostMapping ("/search")
-	@ResponseBody
-	@Transactional(readOnly = true)
-	public String search(@RequestParam("ParamId") long ParamId) {
+	@RequestMapping(value = "/ObjPerson", method = RequestMethod.POST)
+	public String search(@RequestParam("ParamId") int ParamId, Map<String, Object> id) { //получаем со страницы welcome paramID
 
-		String ret;
+		String ret, name;
 
-		long idlong = ParamId;
-
-		try {ret = this.data.getData(idlong).getName() ;} catch (NullPointerException e){ ret = "Null" ;};
+		try {name = this.data.getData(ParamId).getName();} catch (NullPointerException e){ return "Null" ;};
+		ret = "ObjPerson";
+		id.put("name", name);
+		id.put("ParamId", ParamId);
 		return ret;
 	}
+	@RequestMapping(value = "/TreeTable", method = RequestMethod.POST)
+	public String AddAdress(@RequestParam("Adress") String Adress,
+						 	@RequestParam("ParamId") int ParamId){
 
+		DataAdress dataAdress = new DataAdress();
+
+		dataAdress.setInfo_id(ParamId);
+		dataAdress.setAdress_Person(Adress);
+		adressRepository.save(dataAdress);
+
+		return null;
+	}
 
 	@RequestMapping("/foo")
 	public String foo(Map<String, Object> model) {

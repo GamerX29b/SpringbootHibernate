@@ -9,6 +9,6 @@ interface DataRepository extends Repository<DataJPA, Long> {
 
     Page<DataJPA> findAll(Pageable pageable);
 
-    DataJPA findById(Long Id);
+    DataJPA findById(int Id);
 
 }

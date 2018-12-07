@@ -22,8 +22,8 @@
                    url = "jdbc:h2:tcp://localhost/~/Base"
                    user = "sa"  password = ""/>
 
-<sql:query dataSource = "${Base}" sql = "select * from Full_info;" var = "result">
-
+<sql:query dataSource = "${Base}" var = "result">
+    select * from Full_info;
 </sql:query>
 
 <table border = "1" width = "100%">
@@ -42,7 +42,6 @@
             <td> <c:out value = "${row.patronymic}"/></td>
         </tr>
     </c:forEach>
-</table>
 </table>
 </body>
 </html>

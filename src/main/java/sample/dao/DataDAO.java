@@ -17,7 +17,7 @@ class DataDAO implements DataDAOInterface {
 
 
     @Override
-    public DataJPA getData(Long Id) { //Геттер
+    public DataJPA getData(int Id) { //Геттер
 
         Assert.notNull(Id, "Id must not be null");
         return this.dataRepository.findById(Id);
