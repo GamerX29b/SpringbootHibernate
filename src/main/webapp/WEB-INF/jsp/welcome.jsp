@@ -49,5 +49,9 @@ ${time}	${message}
 
 	</table>
 </form>
+
+<form action="/alladress">
+	<button type="submit">Все адреса домов</button>
+</form>
 </body>
 </html>

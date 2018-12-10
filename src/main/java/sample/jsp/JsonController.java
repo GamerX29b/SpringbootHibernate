@@ -25,24 +25,4 @@ public class JsonController {
         return test;
     }
 
-    @GetMapping("/test")
-    @ResponseBody
-    public test setAdress_Person1() {
-        test tw = new test();
-        tw.setA(false);
-        return tw;
-    }
-
-     class  test {
-        private  boolean a;
-
-         public boolean isA() {
-             return a;
-         }
-
-         public void setA(boolean a) {
-             this.a = a;
-         }
-     }
-
 }
